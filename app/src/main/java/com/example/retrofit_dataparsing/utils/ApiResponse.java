@@ -1,6 +1,7 @@
 package com.example.retrofit_dataparsing.utils;
 
 import com.example.retrofit_dataparsing.model.LoginModel;
+import com.example.retrofit_dataparsing.model.MyCityModel;
 import com.example.retrofit_dataparsing.model.PostModel;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface ApiResponse {
 
@@ -22,5 +24,10 @@ public interface ApiResponse {
 
     @GET("/posts")
     Call<ArrayList<PostModel>> MyPosts();
+
+    @GET("/api/cities")
+    Call<MyCityModel> getCity(
+            @Query("division_id") String divisionId
+    );
 
 }

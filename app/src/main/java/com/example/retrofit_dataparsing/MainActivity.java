@@ -9,7 +9,10 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.retrofit_dataparsing.databinding.ActivityMainBinding;
+import com.example.retrofit_dataparsing.model.CityModel;
 import com.example.retrofit_dataparsing.model.LoginModel;
+import com.example.retrofit_dataparsing.model.MyCityModel;
+import com.example.retrofit_dataparsing.model.PostModel;
 import com.example.retrofit_dataparsing.model.PostModel;
 import com.example.retrofit_dataparsing.utils.RetrofitClient;
 
@@ -36,23 +39,42 @@ public class MainActivity extends AppCompatActivity {
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginUser();
+                loginUser(); // practice post method
             }
         });
 
-        getPost();
+        //getPost(); // practice get method without params
+        getCities(); //practice get method with params
 
+    }
 
-//        ArrayList<String> list = new ArrayList<>();
-//        list.add("Asad1");
-//        list.add("Asad2");
-//        list.add("Asad3");
-//        list.add("Asad4");
-//        list.add("Asad5");
-//        for (int i=0;i<list.size();i++){
-//            System.out.println("my name: "+list.get(i));
-//        }
+    private void getCities() {
+        Call<MyCityModel> call = RetrofitClient
+                .getInstance()
+                .getApi()
+                .getCity("1");
 
+        call.enqueue(new Callback<MyCityModel>() {
+            @Override
+            public void onResponse(@NotNull Call<MyCityModel> call, @NotNull Response<MyCityModel> response) {
+                if (response.isSuccessful()){
+                    Log.d(TAG, "onResponse: response found");
+                    MyCityModel model = response.body();
+                    ArrayList<CityModel> cityList = new ArrayList<>(Objects.requireNonNull(model).getCityList());
+                    for (int i = 0; i< cityList.size(); i++){
+                        Log.d(TAG, "onResponse: city_name: "+cityList.get(i).getName());
+                    }
+
+                }else {
+                    Log.d(TAG, "onResponse: response failed");
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<MyCityModel> call, @NotNull Throwable t) {
+                Log.d(TAG, "onFailure: error found: "+t.getMessage());
+            }
+        });
     }
 
     private void getPost() {
@@ -80,28 +102,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "onResponse: error occurred: "+t.getMessage());
             }
         });
-
-//        call.enqueue(new Callback<PostListModel>() {
-//            @Override
-//            public void onResponse(@NotNull Call<ArrayList<>> call, @NotNull Response<ArrayList<PostModel>> response) {
-//                if (response.isSuccessful()){
-//                    Log.d(TAG, "onResponse: response found");
-//                    //PostListModel postModel = response.body();
-//                    ArrayList<PostModel> list = new ArrayList<>();
-//                    list = response.body();
-//                    Log.d(TAG, "onResponse: title: "+ postModel.getPost().getPosts().get(0).getBody());
-//                    //Log.d(TAG, "onResponse: title: "+ Objects.requireNonNull(postModel).getPosts().get(0).getId());
-//                    //Log.d(TAG, "onResponse: title: "+ Objects.requireNonNull(postModel).getPosts().get(0).getBody());
-//                }else {
-//                    Log.d(TAG, "onResponse: response not successful");
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(@NotNull Call<PostListModel> call, @NotNull Throwable t) {
-//                Log.d(TAG, "onResponse: error occurred: "+t.getMessage());
-//            }
-//        });
     }
 
     private void loginUser() {
