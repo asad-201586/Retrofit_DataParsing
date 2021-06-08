@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:visibility="gone"
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_centerInParent="true"
+        android:padding="16dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/phoneEdt"
+            android:layout_marginBottom="16dp"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:hint="Enter phone number"
+            android:padding="16dp"
+            android:background="@drawable/back_stroke"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/passwordEdt"
+            android:layout_marginBottom="20dp"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:hint="Enter password"
+            android:padding="16dp"
+            android:background="@drawable/back_stroke"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/loginButton"
+            android:background="@android:color/holo_red_dark"
+            android:textColor="@android:color/white"
+            android:text="Login"
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
