@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //getPost(); // practice get method without params
-        getCities(); //practice get method with params
+        //getCities(); //practice get method with params
 
     }
 
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
         call.enqueue(new Callback<ArrayList<PostModel>>() {
             @Override
-            public void onResponse(@NotNull Call<ArrayList<PostModel>> call, Response<ArrayList<PostModel>> response) {
+            public void onResponse(@NotNull Call<ArrayList<PostModel>> call, @NotNull Response<ArrayList<PostModel>> response) {
                 if (response.isSuccessful()){
                     Log.d(TAG, "onResponse: response found");
                     ArrayList<PostModel> list = new ArrayList<>(Objects.requireNonNull(response.body()));
